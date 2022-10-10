@@ -1,4 +1,4 @@
-![inv](https://user-images.githubusercontent.com/81551013/194920927-e7bad810-305e-4cf4-ba8b-aecaaae767c5.png)
+![inv2](https://user-images.githubusercontent.com/81551013/194921311-f5fa9bfd-f01b-4a22-82ae-b8080f5cd919.png)
 
 
 ### qb-durability
