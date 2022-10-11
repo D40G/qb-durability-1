@@ -17,6 +17,8 @@ Items Decay System For QBCore Framework. Include Players Inventory, Trunks, Glov
 
 * [qb-inventory](https://github.com/theMani-kh/qb-durability/files/9754833/qb.txt)
 
+* If you don't use Lj or Qb, You sould add quality bar or add quality info in desc box for items.
+
 ### Credits
 * [TNJ](https://github.com/orgs/tnj-development) For lj-inventory's Decay UI
 
