@@ -13,9 +13,9 @@ Items Decay System For QBCore Framework. Include Players Inventory, Trunks, Glov
 ### Inventory
 * Download File and rename to app.js and replace to yourInventory\html\js\app.js
 
-[lj-inventory](https://github.com/theMani-kh/qb-durability/files/9754830/lj.txt)
+* [lj-inventory](https://github.com/theMani-kh/qb-durability/files/9754830/lj.txt)
 
-[qb-inventory](https://github.com/theMani-kh/qb-durability/files/9754833/qb.txt)
+* [qb-inventory](https://github.com/theMani-kh/qb-durability/files/9754833/qb.txt)
 
 ### Credits
 * [TNJ](https://github.com/orgs/tnj-development) For lj-inventory's Decay UI
