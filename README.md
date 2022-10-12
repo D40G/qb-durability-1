@@ -35,52 +35,47 @@ Items Decay System For QBCore Framework. Include Players Inventory, Trunks, Glov
 ```lua
 RegisterNetEvent('inventory:server:UseItemSlot', function(slot)
 	local src = source
-	local Player = QBCore.Functions.GetPlayer(src)
-	local itemData = Player.Functions.GetItemBySlot(slot)
-	if itemData then
-		local itemInfo = QBCore.Shared.Items[itemData.name]
-		if itemData.type == "weapon" then
-			if itemData.info.quality then
-				if itemData.info.quality > 0 then
-					TriggerClientEvent("inventory:client:UseWeapon", src, itemData, true)
-				else
-					TriggerClientEvent("inventory:client:UseWeapon", src, itemData, false)
-				end
-			else
-				TriggerClientEvent("inventory:client:UseWeapon", src, itemData, true)
-			end
-			TriggerClientEvent('inventory:client:ItemBox', src, itemInfo, "use")
-		elseif itemData.useable then
-			if itemData.info.quality then
-				if itemData.info.quality > 0 then
-					TriggerClientEvent("QBCore:Client:UseItem", src, itemData)
-					TriggerClientEvent('inventory:client:ItemBox', src, itemInfo, "use")
-				else
-					TriggerClientEvent("QBCore:Notify", src, "You can't use this item", "error")
-				end
-			else
-				TriggerClientEvent("QBCore:Client:UseItem", src, itemData)
+	local itemData = GetItemBySlot(src, slot)
+	if not itemData then return end
+	local itemInfo = QBCore.Shared.Items[itemData.name]
+	if itemData.type == "weapon" then
+		TriggerClientEvent("inventory:client:UseWeapon", src, itemData, itemData.info.quality and itemData.info.quality > 0)
+		TriggerClientEvent('inventory:client:ItemBox', src, itemInfo, "use")
+	elseif itemData.useable then
+		if itemData.info.quality then
+			if itemData.info.quality > 0 then
+				UseItem(itemData.name, src, itemData)
 				TriggerClientEvent('inventory:client:ItemBox', src, itemInfo, "use")
+			else
+				TriggerClientEvent("QBCore:Notify", src, "You can't use this item", "error")
 			end
+		else
+			UseItem(itemData.name, src, itemData)
+			TriggerClientEvent('inventory:client:ItemBox', src, itemInfo, "use")
 		end
 	end
 end)
 
 RegisterNetEvent('inventory:server:UseItem', function(inventory, item)
 	local src = source
-	local Player = QBCore.Functions.GetPlayer(src)
-	if inventory == "player" or inventory == "hotbar" then
-		local itemData = Player.Functions.GetItemBySlot(item.slot)
-		if itemData then
-			if itemData.type ~= "weapon" then
-				if itemData.info.quality then
-					if itemData.info.quality <= 0 then
-						TriggerClientEvent("QBCore:Notify", src, "You can't use this item", "error")
-						return
-					end
-				end
+	if inventory ~= "player" and inventory ~= "hotbar" then return end
+	local itemData = GetItemBySlot(src, item.slot)
+	if not itemData then return end
+	local itemInfo = QBCore.Shared.Items[itemData.name]
+	if itemData.type == "weapon" then
+		TriggerClientEvent("inventory:client:UseWeapon", src, itemData, itemData.info.quality and itemData.info.quality > 0)
+		TriggerClientEvent('inventory:client:ItemBox', src, itemInfo, "use")
+	else
+		if itemData.info.quality then
+			if itemData.info.quality > 0 then
+				UseItem(itemData.name, src, itemData)
+				TriggerClientEvent('inventory:client:ItemBox', src, itemInfo, "use")
+			else
+				TriggerClientEvent("QBCore:Notify", src, "You can't use this item", "error")
 			end
-			TriggerClientEvent("QBCore:Client:UseItem", src, itemData)
+		else
+			UseItem(itemData.name, src, itemData)
+			TriggerClientEvent('inventory:client:ItemBox', src, itemInfo, "use")
 		end
 	end
 end)
