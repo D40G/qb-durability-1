@@ -19,6 +19,20 @@ Items Decay System For QBCore Framework. Include Players Inventory, Trunks, Glov
 
 * If you don't use Lj or Qb, You sould add quality bar or quality info in desc box for items.
 
+### Server Export
+* You can use DecayItem export in server side.
+
+```lua
+exports['qb-durability']:DecayItem(source, itemName, DamageAmount, Slot) -- Slot is optional
+```
+
+### Server Event
+* You can use Decay server event in client side.
+
+```lua
+TriggerServerEvent("durability:server:Decay", itemName, DamageAmount, Slot) -- Slot is optional
+```
+
 ### Credits
 * [TNJ](https://github.com/orgs/tnj-development) For lj-inventory's Decay UI
 
