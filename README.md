@@ -86,6 +86,8 @@ RegisterNetEvent('inventory:server:UseItem', function(inventory, item)
 end)
 ```
 
+https://user-images.githubusercontent.com/81551013/195428697-307ee516-0834-476a-b49f-48a7c5ec2b63.mp4
+
 ### Server Export
 * You can use DecayItem export in server side.
 
