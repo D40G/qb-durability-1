@@ -23,6 +23,11 @@ RegisterNetEvent('durability:server:update', function(EP, items)
     end
 end)
 
+RegisterNetEvent('durability:server:Decay', function(itemName, damage, Slot)
+    local src = source
+    DecayItem(src, itemName, damage, Slot)
+end)
+
 Citizen.CreateThread(function ()
     while true do
         Citizen.Wait(Config.updateStashs * 1000 * 60 * 60)
@@ -124,3 +129,30 @@ Citizen.CreateThread(function ()
         end
     end
 end)
+
+function DecayItem(src, itemName, damage, Slot)
+    local Player = QBCore.Functions.GetPlayer(src)
+    if Player then
+        local inventory = Player.PlayerData.items
+        local slot = Slot or QBCore.Player.GetFirstSlotByItem(inventory, itemName)
+        if slot ~= nil then
+            local usedItem = inventory[slot]
+            if usedItem.info == '' then
+                usedItem.info = {}
+            end
+            if usedItem.info.quality == nil then
+                usedItem.info.quality = 100
+            end
+            usedItem.info.quality = usedItem.info.quality - damage
+            if usedItem.info.quality < 0 then
+                usedItem.info.quality = 0
+            end
+            inventory[slot] = usedItem
+            Player.Functions.SetInventory(inventory, true)
+            return true
+        end
+    end
+    return false
+end
+
+exports('DecayItem', DecayItem)
