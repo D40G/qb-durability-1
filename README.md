@@ -81,7 +81,7 @@ TriggerServerEvent("durability:server:Decay", itemName, DamageAmount, Slot) -- S
 ```
 
 ### Credits
-* [TNJ](https://github.com/orgs/tnj-development) For lj-inventory's Decay UI
+* [TNJ](https://github.com/orgs/tnj-development)
 
 <br>
 
