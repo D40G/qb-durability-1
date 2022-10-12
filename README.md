@@ -1,6 +1,4 @@
-![lj](https://user-images.githubusercontent.com/81551013/195077592-01b1fb1e-dd12-4af8-b9fc-c8a0ed971d72.png)
-
-![qb](https://user-images.githubusercontent.com/81551013/195080483-ee7711df-d588-47f5-90e1-a6bf80e83b6c.png)
+![decay](https://user-images.githubusercontent.com/81551013/195077592-01b1fb1e-dd12-4af8-b9fc-c8a0ed971d72.png)
 
 ### qb-durability
 Items Decay System For QBCore Framework. Include Players Inventory, Trunks, Gloveboxs and Stashes.
@@ -8,29 +6,14 @@ Items Decay System For QBCore Framework. Include Players Inventory, Trunks, Glov
 ### Dependencies
 * [QBCore](https://github.com/qbcore-framework/qb-core)
 * [Ox MySQL](https://github.com/overextended/oxmysql)
-* [QB Inevntory](https://github.com/qbcore-framework/qb-inventory) or [LJ Inevntory](https://github.com/loljoshie/lj-inventory) (my rather is LJ)
+* [LJ Inevntory](https://github.com/loljoshie/lj-inventory)
 
 ### Inventory
-* According to your inventory, download the file from below. Rename file name to app.js and replace to yourInventory\html\js\app.js
+* For Show Bar and Item Quality in Inventory, Download tnj-inventory and replace html,css,js files with your Inventory Ui.
 
-* [lj-inventory](https://github.com/theMani-kh/qb-durability/files/9754830/lj.txt)
+* [TNJ Inventory](https://github.com/tnj-development/inventory)
 
-* [qb-inventory](https://github.com/theMani-kh/qb-durability/files/9754833/qb.txt)
-
-* If you don't use Lj or Qb, You sould add quality bar or quality info in desc box for items.
-
-* Also you have to replace bellow code with two events handler in yourInventory\server\main.lua
-
-```lua
-'inventory:server:UseItemSlot'
-```
-```lua
-'inventory:server:UseItem'
-```
-
-* qb-inventory: lines 1453 to 1480
-
-* lj-inventory: lines 1342 to 1369
+* Also you have to replace bellow code with events handler in lj-inventory\server\main.lua lines 1342 to 1369
 
 ```lua
 RegisterNetEvent('inventory:server:UseItemSlot', function(slot)
