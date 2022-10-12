@@ -1,31 +1,37 @@
 local QBCore = exports['qb-core']:GetCoreObject()
 
-local Code = math.random(1, 100)
-local goted = {}
-
-RegisterNetEvent('durability:Req', function()
-    local src = source
-    if not goted[src] then
-        goted[src] = true
-        TriggerClientEvent('durability:Res', src, Code)
-    else
-        DropPlayer(src, "Try To Bypass EasyPixel")
-    end
-end)
-
-RegisterNetEvent('durability:server:update', function(EP, items)
-    local src = source
-    if EP == Code then
-        Player = QBCore.Functions.GetPlayer(src)
-        Player.Functions.SetInventory(items, true)
-    else
-        print("Id: "..src.." Try to add Item with "..GetCurrentResourceName())
-    end
-end)
-
-RegisterNetEvent('durability:server:Decay', function(itemName, damage, Slot)
+RegisterNetEvent('qb-durability:server:Decay', function(itemName, damage, Slot)
     local src = source
     DecayItem(src, itemName, damage, Slot)
+end)
+
+Citizen.CreateThread(function()
+    while true do
+        -- Citizen.Wait(Config.updateOnlinePlayers * 1000 * 60 * 60)
+        Citizen.Wait(10000)
+        local players = QBCore.Functions.GetQBPlayers()
+        for src, Player in pairs(players) do
+            if Player then
+                local inventory = Player.PlayerData.items
+                for _, item in pairs(inventory) do
+                    if Config.items[item.name] then
+                        if item.info == '' then
+                            item.info = {}
+                        end
+                        if item.info.quality == nil then
+                            item.info.quality = 100
+                        end
+                        item.info.quality = item.info.quality - Config.items[item.name]
+                        if item.info.quality < 0 then
+                            item.info.quality = 0
+                        end
+                        inventory[item.slot] = item
+                    end
+                end
+                Player.Functions.SetInventory(inventory, true)
+            end
+        end
+    end
 end)
 
 Citizen.CreateThread(function ()

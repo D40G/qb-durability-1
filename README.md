@@ -77,7 +77,7 @@ exports['qb-durability']:DecayItem(source, itemName, DamageAmount, Slot) -- Slot
 * You can use Decay server event in client side.
 
 ```lua
-TriggerServerEvent("durability:server:Decay", itemName, DamageAmount, Slot) -- Slot is optional
+TriggerServerEvent("qb-durability:server:Decay", itemName, DamageAmount, Slot) -- Slot is optional
 ```
 
 ### Credits
