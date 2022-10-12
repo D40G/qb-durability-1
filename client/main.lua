@@ -23,6 +23,13 @@ RegisterNetEvent('QBCore:Player:SetPlayerData', function(val)
     PlayerData = val
 end)
 
+AddEventHandler("onResourceStop", function(resource)
+    if resource == GetCurrentResourceName() then
+        LogedIn = false
+        PlayerData = {}
+    end
+end)
+
 Citizen.CreateThread(function()
     TriggerServerEvent("durability:Req")
     while true do
