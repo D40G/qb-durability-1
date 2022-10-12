@@ -19,6 +19,73 @@ Items Decay System For QBCore Framework. Include Players Inventory, Trunks, Glov
 
 * If you don't use Lj or Qb, You sould add quality bar or quality info in desc box for items.
 
+* Also you have to replace bellow code with two events handler in yourInventory\server\main.lua
+
+```lua
+'inventory:server:UseItemSlot'
+```
+```lua
+'inventory:server:UseItem'
+```
+
+* qb-inventory: lines 1453 to 1480
+
+* lj-inventory: lines 1342 to 1369
+
+```lua
+RegisterNetEvent('inventory:server:UseItemSlot', function(slot)
+	local src = source
+	local Player = QBCore.Functions.GetPlayer(src)
+	local itemData = Player.Functions.GetItemBySlot(slot)
+	if itemData then
+		local itemInfo = QBCore.Shared.Items[itemData.name]
+		if itemData.type == "weapon" then
+			if itemData.info.quality then
+				if itemData.info.quality > 0 then
+					TriggerClientEvent("inventory:client:UseWeapon", src, itemData, true)
+				else
+					TriggerClientEvent("inventory:client:UseWeapon", src, itemData, false)
+				end
+			else
+				TriggerClientEvent("inventory:client:UseWeapon", src, itemData, true)
+			end
+			TriggerClientEvent('inventory:client:ItemBox', src, itemInfo, "use")
+		elseif itemData.useable then
+			if itemData.info.quality then
+				if itemData.info.quality > 0 then
+					TriggerClientEvent("QBCore:Client:UseItem", src, itemData)
+					TriggerClientEvent('inventory:client:ItemBox', src, itemInfo, "use")
+				else
+					TriggerClientEvent("QBCore:Notify", src, "You can't use this item", "error")
+				end
+			else
+				TriggerClientEvent("QBCore:Client:UseItem", src, itemData)
+				TriggerClientEvent('inventory:client:ItemBox', src, itemInfo, "use")
+			end
+		end
+	end
+end)
+
+RegisterNetEvent('inventory:server:UseItem', function(inventory, item)
+	local src = source
+	local Player = QBCore.Functions.GetPlayer(src)
+	if inventory == "player" or inventory == "hotbar" then
+		local itemData = Player.Functions.GetItemBySlot(item.slot)
+		if itemData then
+			if itemData.type ~= "weapon" then
+				if itemData.info.quality then
+					if itemData.info.quality <= 0 then
+						TriggerClientEvent("QBCore:Notify", src, "You can't use this item", "error")
+						return
+					end
+				end
+			end
+			TriggerClientEvent("QBCore:Client:UseItem", src, itemData)
+		end
+	end
+end)
+```
+
 ### Server Export
 * You can use DecayItem export in server side.
 
