@@ -9,7 +9,7 @@ Items Decay System For QBCore Framework. Include Players Inventory, Trunks, Glov
 * [LJ Inevntory](https://github.com/loljoshie/lj-inventory)
 
 ### Quality Info
-* For Show Bar and Item Quality in Inventory, Download tnj-inventory and replace html,css,js files with your Inventory Ui.
+* For Show Bar and Item Quality in Inventory, Download tnj-inventory and replace html folder files with your lj-inventory\html folder.
 
 * [TNJ Inventory](https://github.com/tnj-development/inventory)
 
