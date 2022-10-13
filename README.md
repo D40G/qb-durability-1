@@ -130,6 +130,8 @@ local function AddItem(source, item, amount, slot, info)
 end
 ```
 
+https://user-images.githubusercontent.com/81551013/195541347-32d21cfc-4e0e-4ce7-af4a-582a559ee98c.mp4
+
 ### Server Export
 * You can use DecayItem export in server side.
 
