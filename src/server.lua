@@ -7,8 +7,7 @@ end)
 
 Citizen.CreateThread(function()
     while true do
-        -- Citizen.Wait(Config.updateOnlinePlayers * 1000 * 60 * 60)
-        Citizen.Wait(10000)
+        Citizen.Wait(Config.updateOnlinePlayers * 1000 * 60 * 60)
         local players = QBCore.Functions.GetQBPlayers()
         for src, Player in pairs(players) do
             if Player then
@@ -28,7 +27,7 @@ Citizen.CreateThread(function()
                         inventory[item.slot] = item
                     end
                 end
-                Player.Functions.SetInventory(inventory, true)
+                Player.Functions.SetPlayerData("items", inventory)
             end
         end
     end
@@ -154,7 +153,7 @@ function DecayItem(src, itemName, damage, Slot)
                 usedItem.info.quality = 0
             end
             inventory[slot] = usedItem
-            Player.Functions.SetInventory(inventory, true)
+            Player.Functions.SetPlayerData("items", inventory)
             return true
         end
     end
